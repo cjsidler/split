@@ -9,10 +9,11 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 #### Dependencies
 
 - Next.js
+- Sass
 
 #### How to Run
 
-$ npm install
-$ npm run dev
+- $ npm install
+- $ npm run dev
 
 ### Backend
