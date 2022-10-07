@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Navbar from "../components/navbar";
 
 export default function Home() {
 	return (
@@ -8,18 +9,16 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main>
+			{/* <main>
 				<App />
-			</main>
+			</main> */}
 
-			<footer>
-				<a
-					href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer">
-					Powered by <img src="/vercel.svg" alt="Vercel" className="logo" />
-				</a>
-			</footer>
+			<div className="body">
+				<Navbar />
+				<div className="App">
+					<h1> Welcome to Split. This is the landing page</h1>
+				</div>
+			</div>
 		</div>
 	);
 }
