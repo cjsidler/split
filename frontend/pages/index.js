@@ -16,7 +16,11 @@ export default function Home() {
 			<div className="body">
 				<Navbar />
 				<div className="App">
-					<h1> Welcome to Split. This is the landing page</h1>
+					<div className="landing-image-banner"></div>
+					<div className="welcome-text-container">
+						<h1>Welcome to Split.</h1>
+						<h3>This is the landing page</h3>
+					</div>
 				</div>
 			</div>
 		</div>
