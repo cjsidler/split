@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-
+import { useRouter } from "next/router";
 import Head from "next/head";
 
 import Navbar from "../components/navbar";
 import styles from "./upload.module.scss";
 
 export default function Upload() {
+	const router = useRouter();
+
 	const [file, setFile] = useState();
 	const [fileChosen, setFileChosen] = useState(false);
 
@@ -18,10 +20,10 @@ export default function Upload() {
 		setFileChosen(true);
 	};
 
-	console.log("FILE: ", file);
-	console.log("FILE CHOSEN: ", fileChosen);
-
-	// useEffect(() => {}, [fileChosen]);
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		router.push("/receipts");
+	};
 
 	return (
 		<div className="container">
@@ -38,7 +40,10 @@ export default function Upload() {
 							<div className={styles.selected_file_container}>
 								<h1>Selected File: </h1>
 								<p>{file.name}</p>
-								<button type="submit" className={styles.upload_btn}>
+								<button
+									onClick={handleSubmit}
+									type="submit"
+									className={styles.upload_btn}>
 									Upload Receipt
 								</button>
 							</div>
@@ -50,7 +55,7 @@ export default function Upload() {
 									type="file"
 									onChange={handleChange}
 								/>
-								Custom Upload
+								Choose a Receipt
 							</label>
 						)}
 					</form>

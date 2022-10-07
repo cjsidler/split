@@ -32,6 +32,12 @@
 	margin: 3em;
 }
 
+.upload_btn:hover {
+	cursor: pointer;
+	color: black;
+	background-color: rgb(86, 86, 219);
+}
+
 .pick_file_btn {
 	display: none;
 }
