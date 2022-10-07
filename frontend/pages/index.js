@@ -19,7 +19,10 @@ export default function Home() {
 					<div className="landing-image-banner"></div>
 					<div className="welcome-text-container">
 						<h1>Welcome to Split.</h1>
-						<h3>This is the landing page</h3>
+						<p className="landing-text">
+							Automating the tabsplitting process so you can focus on the
+							important things
+						</p>
 					</div>
 				</div>
 			</div>
