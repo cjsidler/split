@@ -17,3 +17,60 @@
 	justify-content: start;
 	align-items: center;
 }
+
+.navbar-container {
+	display: flex;
+	flex-direction: row;
+	background-color: rgb(43, 40, 40);
+	width: 100%;
+	height: 5%;
+	justify-content: space-around;
+	align-items: center;
+
+	.nav-item {
+		list-style-type: none;
+		color: white;
+	}
+}
+
+.login-form {
+	background-color: red;
+	width: 50%;
+	height: 70%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	background-color: rgba(216, 216, 216, 0.2);
+	box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.login-input {
+	width: 50%;
+	height: 5%;
+	background-color: none;
+	padding: 1em;
+	border-radius: 10px;
+	border: none;
+	margin: 1.5em;
+	font-size: 18px;
+	box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.login-button {
+	width: 53%;
+	height: 10%;
+	font-size: 22px;
+	letter-spacing: 1px;
+	border-radius: 10px;
+	border: none;
+	background-color: rgb(28, 161, 233);
+	box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+}
+
+.login-title {
+	color: rgb(70, 70, 193);
+	letter-spacing: 2px;
+	font-size: 40px;
+}
