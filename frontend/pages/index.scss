@@ -11,7 +11,7 @@
 
 .App {
 	width: 100%;
-	height: 100%;
+	height: 95%;
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
@@ -99,4 +99,75 @@
 	color: rgb(255, 255, 255);
 	font-size: 70px;
 	text-align: center;
+}
+
+/*
+    About Page
+*/
+
+.about-image-banner {
+	background-image: url("/bar-2.jpg");
+	width: 100%;
+	min-height: 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 40%;
+	z-index: 0;
+	position: relative;
+}
+
+.about-text-container {
+	// background-color: rgb(220, 220, 220);
+	width: 100%;
+	min-height: 30%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.about-text {
+	background-color: rgba(212, 212, 212, 0.5);
+	border-radius: 10px;
+	width: 35%;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.profile_img {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: 50% 15%;
+}
+
+.students-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	// padding: 1em;
+}
+
+.student-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 70%;
+	padding: 1em;
+}
+
+.student-about-container {
+	width: 50%;
+	line-height: 2em;
+}
+
+.about-students-title {
+	font-size: 50px;
 }
