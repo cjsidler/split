@@ -22,7 +22,7 @@ export default function Upload() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		router.push("/receipts");
+		router.push("/addreceipt");
 	};
 
 	return (
