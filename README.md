@@ -6,6 +6,8 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 
 ### Frontend
 
+- Runs on localhost:3000
+
 #### Dependencies
 
 - Next.js
@@ -20,6 +22,8 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 
 ### Backend
 
+- Runs on localhost:8080
+
 #### Dependencies
 
 - morgan
@@ -28,6 +32,7 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 - express
 - cors
 - mongoose
+- dotenv
 
 #### How to Run
 
