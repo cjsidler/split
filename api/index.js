@@ -26,6 +26,14 @@ app.get("/", (req, res) => {
 */
 app.use("/users", require("./routes/users"));
 
+// Error middleware
+app.use((err, req, res, next) => {
+	console.log(
+		`Unhandled error ${err}. URL = ${req.originalUrl}, method = ${req.method}`
+	);
+	res.status.send(`500 - Server Error`);
+});
+
 app.listen(PORT, () => {
 	console.log(`Example app listening on port ${PORT}`);
 });
