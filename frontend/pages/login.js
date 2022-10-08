@@ -34,19 +34,21 @@ export default function Login() {
 		console.log(response);
 	};
 
-	console.log("USERNAME: ", username, "PASSWORD: ", password);
-
 	return (
 		<div className="body">
 			<Navbar />
 			<div className="App">
 				<h1 className="login-title">Login to Split</h1>
-				<form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+				<form
+					className="login-form"
+					onSubmit={(e) => handleSubmit(e)}
+					autoComplete="new-password">
 					<input
 						onChange={handleChange}
 						className="login-input"
 						placeholder="Username"
 						name="username"
+						autoComplete="off"
 					/>
 					<input
 						onChange={handleChange}
@@ -54,6 +56,7 @@ export default function Login() {
 						placeholder="Password"
 						name="password"
 						type="password"
+						autoComplete="off"
 					/>
 					<button className="login-button">Login</button>
 				</form>

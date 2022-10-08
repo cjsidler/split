@@ -35,6 +35,8 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 - dotenv
 - @veryfi/veryfi-sdk
 - multer
+- bcrypt
+- jsonwebtoken
 
 #### How to Run
 

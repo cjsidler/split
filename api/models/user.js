@@ -11,8 +11,6 @@ db.once("open", () => {
 	console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
-// mongoose.set("useCreateIndex", true);
-
 // Define Schema
 const userSchema = mongoose.Schema({
 	username: { type: String, required: true },
@@ -32,7 +30,7 @@ const createUser = async (username, password, email) => {
 };
 
 const findUsers = async () => {
-	const query = Users.find();
+	const query = User.find();
 	const result = await query.exec();
 	return result;
 };
