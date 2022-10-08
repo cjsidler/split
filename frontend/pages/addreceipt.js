@@ -8,6 +8,19 @@ import styles from "./addreceipt.module.scss";
 export default function Login() {
 	console.log(data);
 
+	const renderItems = () => {
+		return data.line_items.map((item) => {
+			return (
+				<div className={styles.item_container}>
+					<p>Price: {item.total}</p>
+					<p>Item: {item.description}</p>
+					<p>Quantity: {item.quantity}</p>
+					<p>Type: {item.type}</p>
+				</div>
+			);
+		});
+	};
+
 	return (
 		<div className="body">
 			<Navbar />
@@ -34,6 +47,10 @@ export default function Login() {
 					<p>subtotal: {data.subtotal}</p>
 					<p>tax: {data.tax}</p>
 					<p>total: {data.total}</p>
+
+					<h1>Items</h1>
+
+					{renderItems()}
 				</div>
 			</div>
 		</div>
