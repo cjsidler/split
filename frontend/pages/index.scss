@@ -18,6 +18,9 @@
 	align-items: center;
 }
 
+/*
+	Navbar
+*/
 .navbar-container {
 	display: flex;
 	flex-direction: row;
@@ -35,6 +38,14 @@
 			text-decoration: none;
 			color: white;
 		}
+
+		.logout {
+			color: rgb(241, 86, 86);
+		}
+	}
+
+	.nav-item:hover {
+		cursor: pointer;
 	}
 }
 

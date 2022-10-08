@@ -1,10 +1,9 @@
 const bcrypt = require("bcrypt");
-const e = require("express");
 const express = require("express");
 const router = require("express").Router();
 var jwt = require("jsonwebtoken");
 
-const { User, createUser, findUsers } = require("../models/user.js");
+const { User, createUser, findUsers, findUser } = require("../models/user.js");
 
 const SALT_ROUNDS = 10;
 require("dotenv").config();
@@ -24,7 +23,6 @@ router.get("/", async (req, res, next) => {
 
 /*
     Signup Route
-		- Need to modify this. Curently same as login right now
 */
 router.post("/signup", async (req, res, next) => {
 	// Save user to db
@@ -68,33 +66,31 @@ router.post("/login", async (req, res, next) => {
 	try {
 		const { username, password } = req.body;
 
-		let newUser;
+		// Make sure user exists in db
+		const foundUser = await findUser(username);
+		const foundPw = foundUser["password"];
 
-		if (username && password) {
-			const hashedPw = await bcrypt.hash(password, 10);
+		// compare hashedPw to unhashedPw
+		const verifiedPw = await bcrypt.compare(password, foundPw);
 
-			newUser = await createUser(username, hashedPw, "");
-
-			// Create token & include username
-			const token = jwt.sign(
-				{
-					username: username,
-				},
-				JWT_SECRET,
-				{ expiresIn: 60 * 60 }
-			);
-
-			res.json({ token });
+		// invalid pw
+		if (!verifiedPw) {
+			return res.json({ message: "Invalid Password" });
 		}
-		// Missing fields
-		else {
-			res.status(400).send({ error: "All fields are required" });
-		}
+
+		// Create token & include username
+		const token = jwt.sign(
+			{
+				username: username,
+			},
+			JWT_SECRET,
+			{ expiresIn: 60 * 60 }
+		);
+
+		res.json({ token });
 	} catch (err) {
 		res.status(500).send(err);
 	}
-
-	// res.json({ message: "Youve hit the login route" });
 });
 
 module.exports = router;

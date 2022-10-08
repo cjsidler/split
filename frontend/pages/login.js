@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 // import { signIn, signOut, useSession } from "next-auth/client";
 // import GoogleProvider from "next-auth/providers/google";
@@ -7,6 +10,7 @@ import axios from "axios";
 import Navbar from "../components/navbar";
 
 export default function Login() {
+	const router = useRouter();
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -30,7 +34,19 @@ export default function Login() {
 			data: credentials,
 		});
 
-		console.log(response);
+		// Raw token
+		const token = response.data.token;
+
+		// Decode token
+		const decoded = jwt_decode(token);
+
+		// Save token contents to local storage for persistence
+		localStorage.setItem("username", decoded.username);
+		localStorage.setItem("email", decoded.email);
+		localStorage.setItem("exp", decoded.exp);
+		localStorage.setItem("iat", decoded.iat);
+
+		router.push("/upload");
 	};
 
 	return (
