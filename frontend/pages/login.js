@@ -37,7 +37,7 @@ export default function Login() {
 			<Navbar />
 			<div className="App">
 				<h1 className="login-title">Login to Split</h1>
-				<form className="login-form">
+				<form className="login-form" onSubmit={(e) => handleSubmit(e)}>
 					<input
 						onChange={handleChange}
 						className="login-input"

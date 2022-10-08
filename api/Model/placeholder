@@ -1,5 +1,0 @@
-mongodb+srv://mattlamDB:<password>@cluster0.dlleb.mongodb.net/?retryWrites=true&w=majority
-
-mongoose.connect("mongodb+srv://mongo:mongo@cluster0.eyhty.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-
-SaWzAYjznnpjiglH
