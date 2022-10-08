@@ -3,7 +3,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const app = express();
-
+required("dotenv");
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 // Request logger for NodeJs
