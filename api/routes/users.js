@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const e = require("express");
 const express = require("express");
 const router = require("express").Router();
 var jwt = require("jsonwebtoken");
@@ -28,7 +29,7 @@ router.get("/", async (req, res, next) => {
 router.post("/signup", async (req, res, next) => {
 	// Save user to db
 	try {
-		const { username, password } = req.body;
+		const { username, password, email } = req.body;
 
 		let newUser;
 
@@ -37,12 +38,12 @@ router.post("/signup", async (req, res, next) => {
 
 			const hashedPw = await bcrypt.hash(password, 10);
 
-			newUser = await createUser(username, hashedPw, "");
-
+			newUser = await createUser(username, hashedPw, email);
 			// Create token & include username
 			const token = jwt.sign(
 				{
 					username: username,
+					email: email,
 				},
 				JWT_SECRET,
 				{ expiresIn: 60 * 60 }
