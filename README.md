@@ -9,6 +9,7 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 #### Dependencies
 
 - Next.js
+- axios
 - Sass
 
 #### How to Run
@@ -18,6 +19,17 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 - $ npm run dev
 
 ### Backend
+
+#### Dependencies
+
+- morgan
+- body-parser
+- nodemon
+- express
+- cors
+- mongoose
+
+#### How to Run
 
 - $npm i -g nodemon
 - $ nodemon
