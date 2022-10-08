@@ -6,9 +6,12 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 
 ### Frontend
 
+- Runs on localhost:3000
+
 #### Dependencies
 
 - Next.js
+- axios
 - Sass
 
 #### How to Run
@@ -18,6 +21,20 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 - $ npm run dev
 
 ### Backend
+
+- Runs on localhost:8080
+
+#### Dependencies
+
+- morgan
+- body-parser
+- nodemon
+- express
+- cors
+- mongoose
+- dotenv
+
+#### How to Run
 
 - $npm i -g nodemon
 - $ nodemon
