@@ -15,7 +15,7 @@ const username = process.env.VERYFI_USERNAME;
 const api_key = process.env.VERYFI_APIKEY;
 
 const app = express();
-
+require("dotenv").config;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());

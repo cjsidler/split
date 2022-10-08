@@ -1,6 +1,8 @@
 const express = require("express");
 const router = require("express").Router();
 
+const { User, createUser } = require("../models/user.js");
+
 /*
     GET USERS ROUTE
 */
