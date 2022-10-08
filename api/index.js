@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const multer = require("multer");
 const upload = multer({ dest: "uploads" });
 const fs = require("fs");
@@ -28,11 +27,11 @@ app.use(express.urlencoded({ extended: true }));
   ROOT ROUTE
 */
 app.get("/", (req, res) => {
-    res.json({ message: "This is the root route" });
+    res.json({ message: "This is the root route!" });
 });
 
 /*
-  USER ROUTES
+	USERS Middleware
 */
 app.use("/users", require("./routes/users"));
 
