@@ -10,8 +10,6 @@ import Blog from './Model/Blog.js';
 */
 const PORT = 8080;
 
-
-
 // app.use(cors());
 
 // Create a new blog post object
