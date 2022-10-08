@@ -10,7 +10,7 @@ import Blog from './Model/Blog.js';
 */
 const PORT = 8080;
 
-mongoose.connect("mongodb+srv://mattlamDB:SaWzAYjznnpjiglH@cluster0.dlleb.mongodb.net/?retryWrites=true&w=majority")
+
 
 // app.use(cors());
 
