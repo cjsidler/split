@@ -1,4 +1,4 @@
-require("dotenv");
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
@@ -15,7 +15,6 @@ const username = process.env.VERYFI_USERNAME;
 const api_key = process.env.VERYFI_APIKEY;
 
 const app = express();
-require("dotenv").config;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -30,7 +29,7 @@ app.use(bodyParser.json());
 const PORT = 8080;
 
 app.get("/", (req, res) => {
-	res.json({ message: "This is the root route!" });
+    res.json({ message: "This is the root route!" });
 });
 
 /*
@@ -45,32 +44,30 @@ app.use("/users", require("./routes/users"));
 // app.post("/upload_files", upload.single("file"), async (req, res) => {
 //     const veryfi_client = new Client(client_id, client_secret, username, api_key);
 //     try {
-//         const data = await veryfi_client.process_document(req.file.path);
-//         console.log(data);
-//         res.json(data);
-
-//         // Remove temporary file
-//         fs.unlink(req.file.path, (err) => {
-//             if (err) console.log(err);
-//         });
+//         const response = await veryfi_client.process_document(req.file.path);
+//         console.log(response.data);
+//         res.status(200).send(response.data);
 //     } catch (error) {
 //         console.log(error);
 //         res.json("error calling OCR API");
 //     }
+
+//     // Remove temporary file
+//     fs.unlink(req.file.path, (err) => {
+//         if (err) console.log(err);
+//     });
 // });
 
 app.post("/upload_files", async (req, res) => {
-	res.json(sample_ocr_response);
+    res.json(sample_ocr_response);
 });
 
 // Error middleware
 app.use((err, req, res, next) => {
-	console.log(
-		`Unhandled error ${err}. URL = ${req.originalUrl}, method = ${req.method}`
-	);
-	res.status.send(`500 - Server Error`);
+    console.log(`Unhandled error ${err}. URL = ${req.originalUrl}, method = ${req.method}`);
+    res.status.send(`500 - Server Error`);
 });
 
 app.listen(PORT, () => {
-	console.log(`Example app listening on port ${PORT}`);
+    console.log(`Example app listening on port ${PORT}`);
 });
