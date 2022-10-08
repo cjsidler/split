@@ -1,11 +1,12 @@
 import Navbar from "../components/navbar";
+import ReceiptTable from "../components/ReceiptTable";
 
 export default function Login() {
 	return (
 		<div className="body">
 			<Navbar />
 			<div className="App">
-				<h1>this is the receipts page</h1>
+				<ReceiptTable />
 			</div>
 		</div>
 	);
