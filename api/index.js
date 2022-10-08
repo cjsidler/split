@@ -5,7 +5,7 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads" });
 const fs = require("fs");
 const Client = require("@veryfi/veryfi-sdk");
-const sample_ocr_response = require("./sample_ocr_response.json");
+const sample_ocr_response = require("./uploads/result.json");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 const PORT = 8080;
 
 app.get("/", (req, res) => {
-    res.json({ message: "This is the root route!" });
+	res.json({ message: "This is the root route!" });
 });
 
 /*
@@ -60,7 +60,7 @@ app.use("/users", require("./routes/users"));
 // });
 
 app.post("/upload_files", async (req, res) => {
-    res.json(sample_ocr_response);
+	res.json(sample_ocr_response);
 });
 
 // Error middleware
@@ -72,5 +72,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`);
+	console.log(`Example app listening on port ${PORT}`);
 });
