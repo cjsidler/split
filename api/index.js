@@ -28,3 +28,18 @@ app.use("/users", require("./routes/users"));
 app.listen(PORT, () => {
 	console.log(`Example app listening on port ${PORT}`);
 });
+  
+// Insert the article in our MongoDB database
+await article.save();
+
+// Find a single blog post
+// const firstArticle = await Blog.findOne({});
+// console.log(firstArticle);
+
+// app.get("/", (req, res) => {
+// 	res.send("Hello World!");
+// });
+
+// app.listen(PORT, () => {
+// 	console.log(`Example app listening on port ${PORT}`);
+// });
