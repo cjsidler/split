@@ -63,6 +63,14 @@ app.post("/upload_files", async (req, res) => {
     res.json(sample_ocr_response);
 });
 
+// Error middleware
+app.use((err, req, res, next) => {
+	console.log(
+		`Unhandled error ${err}. URL = ${req.originalUrl}, method = ${req.method}`
+	);
+	res.status.send(`500 - Server Error`);
+});
+
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);
 });
