@@ -1,13 +1,20 @@
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
 const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+// Request logger for NodeJs
+app.use(morgan("tiny"));
+// Parse all requests before handlers. Puts data on req.body
+app.use(bodyParser.json());
 
 /*
   CONSTANTS
 */
 const PORT = 8080;
-
-app.use(cors());
 
 app.get("/", (req, res) => {
 	res.json({ message: "This is the root route!" });

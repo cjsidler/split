@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
 */
 router.post("/login", async (req, res, next) => {
 	const body = req.body;
-	console.log("BODY:", req.body);
+	console.log("BODY:", body);
 	res.json({ message: "Youve hit the login route" });
 });
 
