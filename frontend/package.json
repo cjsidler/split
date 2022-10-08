@@ -9,6 +9,7 @@
 		"axios": "^1.1.2",
 		"form-data": "^4.0.0",
 		"gapi-script": "^1.2.0",
+		"jwt-decode": "^3.1.2",
 		"next": "latest",
 		"next-auth": "^4.12.3",
 		"react": "17.0.2",

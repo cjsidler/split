@@ -1,8 +1,14 @@
+const bcrypt = require("bcrypt");
+const e = require("express");
 const express = require("express");
 const router = require("express").Router();
+var jwt = require("jsonwebtoken");
 
 const { User, createUser, findUsers } = require("../models/user.js");
 
+const SALT_ROUNDS = 10;
+require("dotenv").config();
+const JWT_SECRET = process.env.JWT_SECRET;
 /*
     Get list of all Users
 */
@@ -17,6 +23,44 @@ router.get("/", async (req, res, next) => {
 });
 
 /*
+    Signup Route
+		- Need to modify this. Curently same as login right now
+*/
+router.post("/signup", async (req, res, next) => {
+	// Save user to db
+	try {
+		const { username, password, email } = req.body;
+
+		let newUser;
+
+		if (username && password) {
+			// Need to hash pw here & issue JWT back to client
+
+			const hashedPw = await bcrypt.hash(password, 10);
+
+			newUser = await createUser(username, hashedPw, email);
+			// Create token & include username
+			const token = jwt.sign(
+				{
+					username: username,
+					email: email,
+				},
+				JWT_SECRET,
+				{ expiresIn: 60 * 60 }
+			);
+
+			res.json({ token });
+		} else {
+			res.status(400).send({ error: "All fields are required" });
+		}
+	} catch (err) {
+		res.status(500).send(err);
+	}
+
+	// res.json({ message: "Youve hit the login route" });
+});
+
+/*
     Login Route
 */
 router.post("/login", async (req, res, next) => {
@@ -27,11 +71,23 @@ router.post("/login", async (req, res, next) => {
 		let newUser;
 
 		if (username && password) {
-			// Need to hash pw here & issue JWT back to client
+			const hashedPw = await bcrypt.hash(password, 10);
 
-			newUser = await createUser(username, password, "");
-			res.status(201).send(newUser);
-		} else {
+			newUser = await createUser(username, hashedPw, "");
+
+			// Create token & include username
+			const token = jwt.sign(
+				{
+					username: username,
+				},
+				JWT_SECRET,
+				{ expiresIn: 60 * 60 }
+			);
+
+			res.json({ token });
+		}
+		// Missing fields
+		else {
 			res.status(400).send({ error: "All fields are required" });
 		}
 	} catch (err) {

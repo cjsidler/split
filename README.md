@@ -13,6 +13,7 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 - Next.js
 - axios
 - Sass
+- jwt-decode
 
 #### How to Run
 
@@ -35,6 +36,8 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 - dotenv
 - @veryfi/veryfi-sdk
 - multer
+- bcrypt
+- jsonwebtoken
 
 #### How to Run
 
