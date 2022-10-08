@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import FormData from "form-data";
 
 import Navbar from "../components/navbar";
 import styles from "./upload.module.scss";
@@ -13,16 +14,23 @@ export default function Upload() {
 
 	const handleChange = (e) => {
 		setFile(e.target.files[0]);
-		chooseFile();
-	};
-
-	const chooseFile = (e, val) => {
 		setFileChosen(true);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		router.push("/addreceipt");
+
+		const formData = new FormData();
+		formData.append("file", file);
+		fetch("http://localhost:8080/upload_files", {
+			method: "POST",
+			body: formData,
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch((err) => ("Error occured", err));
+
+		router.push("/receipts");
 	};
 
 	return (
@@ -48,7 +56,9 @@ export default function Upload() {
 								</button>
 							</div>
 						) : (
-							<label for="file-upload" className={styles.custom_file_upload}>
+							<label
+								htmlFor="file-upload"
+								className={styles.custom_file_upload}>
 								<input
 									id="file-upload"
 									className={styles.pick_file_btn}
