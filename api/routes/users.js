@@ -1,22 +1,44 @@
 const express = require("express");
 const router = require("express").Router();
 
-const { User, createUser } = require("../models/user.js");
+const { User, createUser, findUsers } = require("../models/user.js");
 
 /*
-    GET USERS ROUTE
+    Get list of all Users
 */
 router.get("/", async (req, res, next) => {
-	res.json({ message: "This is the users route" });
+	// Get list of all users
+	try {
+		const users = await findUsers();
+		res.status(200).send(users);
+	} catch (err) {
+		res.status(500).send(err);
+	}
 });
 
 /*
     Login Route
 */
 router.post("/login", async (req, res, next) => {
-	const body = req.body;
-	console.log("BODY:", body);
-	res.json({ message: "Youve hit the login route" });
+	// Save user to db
+	try {
+		const { username, password } = req.body;
+
+		let newUser;
+
+		if (username && password) {
+			// Need to hash pw here & issue JWT back to client
+
+			newUser = await createUser(username, password, "");
+			res.status(201).send(newUser);
+		} else {
+			res.status(400).send({ error: "All fields are required" });
+		}
+	} catch (err) {
+		res.status(500).send(err);
+	}
+
+	// res.json({ message: "Youve hit the login route" });
 });
 
 module.exports = router;
