@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const receiptSchema = require("./receipt");
 require("dotenv").config();
 
 mongoose.connect(process.env.DB_URI, {
@@ -12,29 +13,6 @@ db.once("open", () => {
 });
 
 // Define Schema
-const lineItemSchema = new mongoose.Schema({
-    description: { type: String },
-    quantity: { type: Number },
-    total: { type: Number },
-});
-
-const vendorSchema = new mongoose.Schema({
-    name: { type: String },
-    phoneNumber: { type: String },
-    address: { type: String },
-});
-
-const receiptSchema = new mongoose.Schema({
-    date: { type: String },
-    image_url: { type: String },
-    line_items: [lineItemSchema],
-    tax: { type: Number },
-    subtotal: { type: Number },
-    tip: { type: Number },
-    total: { type: Number },
-    vendor: [vendorSchema],
-});
-
 const userSchema = mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
