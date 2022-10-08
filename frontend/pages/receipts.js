@@ -1,6 +1,8 @@
 import Navbar from "../components/navbar";
 import ReceiptTable from "../components/ReceiptTable";
+
 import styles from "./receipts.module.scss";
+
 
 export default function Receipts() {
 	return (
@@ -10,6 +12,7 @@ export default function Receipts() {
 				<div className={styles.table_container}>
 					<ReceiptTable className={styles.table_parent}/>
 				</div>
+
 			</div>
 		</div>
 	);
