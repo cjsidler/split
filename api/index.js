@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const upload = multer({ dest: "uploads" });
+const fs = require("fs");
 const Client = require("@veryfi/veryfi-sdk");
 
 const client_id = process.env.VERYFI_CLIENT_ID;
@@ -40,6 +41,11 @@ app.post("/upload_files", upload.single("file"), async (req, res) => {
         const data = await veryfi_client.process_document(req.file.path);
         console.log(data);
         res.json(data);
+
+        // Remove temporary file
+        fs.unlink(req.file.path, (err) => {
+            if (err) console.log(err);
+        });
     } catch (error) {
         console.log(error);
         res.json("error calling OCR API");
