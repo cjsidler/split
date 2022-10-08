@@ -1,30 +1,37 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+// const express = require("express");
+// const cors = require("cors");
+// const app = express();
 
-const app = express();
+import mongoose from 'mongoose';
+import Blog from './Model/Blog.js';
 
 /*
   CONSTANTS
 */
 const PORT = 8080;
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded());
+// app.use(cors());
 
-/*
-  ROOT ROUTE
-*/
-app.get("/", (req, res) => {
-	res.json({ message: "This is the root route" });
+// Create a new blog post object
+const article = new Blog({
+    title: 'Awesome Post!',
+    slug: 'awesome-post',
+    published: true,
+    content: 'This is the best post ever',
+    tags: ['featured', 'announcement'],
 });
+  
+// Insert the article in our MongoDB database
+await article.save();
 
-/*
-  USER ROUTES
-*/
-app.use("/users", require("./routes/users"));
+// Find a single blog post
+// const firstArticle = await Blog.findOne({});
+// console.log(firstArticle);
 
-app.listen(PORT, () => {
-	console.log(`Example app listening on port ${PORT}`);
-});
+// app.get("/", (req, res) => {
+// 	res.send("Hello World!");
+// });
+
+// app.listen(PORT, () => {
+// 	console.log(`Example app listening on port ${PORT}`);
+// });
