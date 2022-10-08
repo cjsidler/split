@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-console.log("DATABASE URI: ", process.env.DB_URI);
-
 mongoose.connect(process.env.DB_URI, {
 	useNewUrlParser: true,
 });
@@ -25,7 +23,7 @@ const userSchema = mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 const createUser = async (username, password, email) => {
-	const user = new Exercise({
+	const user = new User({
 		username: username,
 		password: password,
 		email: email,
@@ -33,11 +31,11 @@ const createUser = async (username, password, email) => {
 	return user.save();
 };
 
-// const findExercises = async () => {
-// 	const query = Exercise.find();
-// 	const result = await query.exec();
-// 	return result;
-// };
+const findUsers = async () => {
+	const query = Users.find();
+	const result = await query.exec();
+	return result;
+};
 
 // const findExercise = async (id) => {
 // 	const query = Exercise.findOne({ _id: id });
@@ -61,7 +59,7 @@ const createUser = async (username, password, email) => {
 module.exports = {
 	User,
 	createUser,
-	// findExercises,
+	findUsers,
 	// findExercise,
 	// deleteExercise,
 	// updateExercise,
