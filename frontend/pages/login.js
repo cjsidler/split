@@ -25,7 +25,11 @@ export default function Login() {
 
 		const credentials = { username: username, password: password };
 
-		const response = await axios.post("localhost:8080/login", credentials);
+		const response = await axios({
+			method: "POST",
+			url: "http://localhost:8080/users/login",
+			data: credentials,
+		});
 
 		console.log(response);
 	};
@@ -49,6 +53,7 @@ export default function Login() {
 						className="login-input"
 						placeholder="Password"
 						name="password"
+						type="password"
 					/>
 					<button className="login-button">Login</button>
 				</form>
