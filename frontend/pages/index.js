@@ -2,6 +2,8 @@ import Head from "next/head";
 import Navbar from "../components/navbar";
 
 export default function Home() {
+	// Store current user in state here
+
 	return (
 		<div className="container">
 			<Head>

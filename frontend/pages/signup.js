@@ -45,7 +45,7 @@ export default function Signup() {
 		const token = response.data.token;
 
 		// Decode token
-		var decoded = jwt_decode(token);
+		const decoded = jwt_decode(token);
 
 		// Save token contents to local storage for persistence
 		localStorage.setItem("username", decoded.username);
