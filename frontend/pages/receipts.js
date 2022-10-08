@@ -1,12 +1,18 @@
 import Navbar from "../components/navbar";
 import ReceiptTable from "../components/ReceiptTable";
 
-export default function Login() {
+import styles from "./receipts.module.scss";
+
+
+export default function Receipts() {
 	return (
 		<div className="body">
 			<Navbar />
 			<div className="App">
-				<ReceiptTable />
+				<div className={styles.table_container}>
+					<ReceiptTable className={styles.table_parent}/>
+				</div>
+
 			</div>
 		</div>
 	);
