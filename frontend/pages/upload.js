@@ -31,17 +31,11 @@ export default function Upload() {
         return localStorage.getItem("username");
     };
 
-    // useEffect(() => {
-
-    // }, []);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
         formData.append("file", file);
-
-        console.log(localStorage.getItem("token"));
 
         const response = await axios({
             method: "post",
@@ -53,8 +47,8 @@ export default function Upload() {
             },
         });
 
-        console.log(response);
-        setReceiptData(response);
+        setReceiptData(response.data);
+        localStorage.setItem("receiptData", JSON.stringify(response.data));
 
         router.push("/addreceipt");
     };

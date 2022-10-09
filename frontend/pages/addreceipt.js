@@ -7,22 +7,25 @@ import Navbar from "../components/navbar";
 import styles from "./addreceipt.module.scss";
 
 import data from "../data/result.json";
+import { useEffect, useState } from "react";
 
 export default function Login() {
     const isLoggedIn = useStore((state) => state.isLoggedIn);
     const receiptData = useStore((state) => state.receiptData);
+    const setReceiptData = useStore((state) => state.setReceiptData);
     const router = useRouter();
+
+    const [noReceiptDataAvail, setNoReceiptDataAvail] = useState(false);
 
     console.log({ receiptData });
 
     const renderItems = () => {
-        return data.line_items.map((item) => {
+        return receiptData.line_items.map((item, i) => {
             return (
-                <div className={styles.item_container}>
-                    <p>Price: {item.total}</p>
+                <div className={styles.item_container} key={i}>
                     <p>Item: {item.description}</p>
                     <p>Quantity: {item.quantity}</p>
-                    <p>Type: {item.type}</p>
+                    <p>Price: {item.total}</p>
                 </div>
             );
         });
@@ -40,8 +43,24 @@ export default function Login() {
             },
         });
 
+        localStorage.removeItem("receiptData");
+
         router.push("/receipts");
     };
+
+    useEffect(() => {
+        let receipt = localStorage.getItem("receiptData");
+        if (receipt) {
+            receipt = JSON.parse(receipt);
+        }
+        if (!receiptData) {
+            if (receipt) {
+                setReceiptData(receipt);
+            } else {
+                setNoReceiptDataAvail(true);
+            }
+        }
+    }, []);
 
     return (
         <div className="body">
@@ -51,26 +70,27 @@ export default function Login() {
                     <Unauthorized />
                 </div>
             )}
-            {isLoggedIn && (
+            {noReceiptDataAvail && <div>Hmm...no receipt data available. Please try again.</div>}
+            {isLoggedIn && receiptData && (
                 <div className="App">
                     <h1 className="login-title">Review Receipt before saving</h1>
 
                     <div className={styles.receipt_container}>
                         <div className={styles.vendor_container}>
-                            <img src={data.img_url} alt="image" />
-                            <p>{data.vendor.name}</p>
-                            <p>{data.vendor.address}</p>
+                            <img src={receiptData.img_url} alt="image" />
+                            <p>{receiptData.vendor.name}</p>
+                            <p>{receiptData.vendor.address}</p>
                         </div>
 
-                        <p>Date: {data.date}</p>
+                        <p>Date: {receiptData.date}</p>
 
                         <h1>Items</h1>
                         {renderItems()}
 
-                        <p>Tax: {data.tax}</p>
-                        <p>Subtotal: {data.subtotal}</p>
-                        <p>Tip: {data.tip}</p>
-                        <p>Total: {data.total}</p>
+                        <p>Tax: {receiptData.tax}</p>
+                        <p>Subtotal: {receiptData.subtotal}</p>
+                        <p>Tip: {receiptData.tip}</p>
+                        <p>Total: {receiptData.total}</p>
 
                         <button className="save-receipt-btn" onClick={saveReceipt}>
                             Save Receipt
