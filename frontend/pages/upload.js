@@ -5,6 +5,7 @@ import FormData from "form-data";
 import useStore from "../store/store";
 
 import axios from "axios";
+import { BsCloudUpload } from "react-icons/bs";
 
 import Navbar from "../components/navbar";
 import Unauthorized from "../components/Unauthorized";
@@ -92,4 +93,5 @@ export default function Upload() {
             </div>
         </div>
     );
+
 }

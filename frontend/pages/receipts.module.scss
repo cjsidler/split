@@ -65,10 +65,10 @@
 	color: white;
 }
 
-.vendor_link {
-	color: red;
-	text-decoration: none;
-}
+// .vendor_link {
+// 	color: rgba(50, 77, 232, 0.5);
+// 	text-decoration: none;
+// }
 
 .error_container {
 	width: 100%;
@@ -76,4 +76,17 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.Modal {
+	background-color: rgb(195, 69, 69, 0.5);
+	// display: flex;
+	top: 50%;
+	left: 50%;
+	right: auto;
+	bottom: auto;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	width: 50%;
+	height: 50%;
 }
