@@ -7,6 +7,7 @@ import useStore from "../store/store";
 import axios from "axios";
 
 import Navbar from "../components/navbar";
+import Unauthorized from "../components/Unauthorized";
 import styles from "./upload.module.scss";
 
 export default function Upload() {
@@ -63,7 +64,7 @@ export default function Upload() {
             <div className="body">
                 <Navbar />
                 <div className={styles.upload_screen_container}>
-                    {!isLoggedIn && <button onClick={() => router.push("/login")}>Log-in</button>}
+                    {!isLoggedIn && <Unauthorized />}
                     {isLoggedIn && (
                         <form className={styles.upload_form}>
                             {fileChosen ? (
