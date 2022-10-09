@@ -1,11 +1,16 @@
+import { useRouter } from "next/router";
+
+import axios from "axios";
+
 import Navbar from "../components/navbar";
-
 // Loading json to simulate API request
-import data from "../data/result.json";
-
 import styles from "./addreceipt.module.scss";
 
+import data from "../data/result.json";
+
 export default function Login() {
+	const router = useRouter();
+
 	const renderItems = () => {
 		return data.line_items.map((item) => {
 			return (
@@ -17,6 +22,21 @@ export default function Login() {
 				</div>
 			);
 		});
+	};
+
+	const saveReceipt = async (e) => {
+		e.preventDefault();
+
+		const response = await axios({
+			method: "post",
+			url: "http://localhost:8080/receipts",
+			data: data,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		});
+
+		router.push("/receipts");
 	};
 
 	return (
@@ -33,6 +53,10 @@ export default function Login() {
 						<p>{data.vendor.web}</p>
 						<p>{data.vendor_type}</p>
 					</div>
+
+					<button className="save-receipt-btn" onClick={saveReceipt}>
+						Save Receipt
+					</button>
 
 					<p>Payment: {data.payment_display_name}</p>
 					<p>cashback: {data.cashback}</p>

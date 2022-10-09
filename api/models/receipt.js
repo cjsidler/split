@@ -13,10 +13,9 @@ db.once("open", () => {
 	console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
-// const Vendor = mongoose.model("Vendor", vendorSchema);
-
 // Define Schema
 const receiptSchema = new mongoose.Schema({
+	userId: { type: String },
 	date: { type: String },
 	image_url: { type: String },
 	line_items: [lineItemSchema],
@@ -31,7 +30,7 @@ const Receipt = mongoose.model("Receipt", receiptSchema);
 const LineItem = mongoose.model("LineItem", lineItemSchema);
 const Vendor = mongoose.model("Vendor", vendorSchema);
 
-const createReceipt = async (data) => {
+const createReceipt = async (data, userId) => {
 	const vendor = new Vendor({
 		name: data.vendor.name,
 		phoneNumber: data.vendor.phoneNumber,
@@ -50,6 +49,7 @@ const createReceipt = async (data) => {
 	});
 
 	const receipt = new Receipt({
+		userId: userId,
 		date: data.date,
 		image_url: data.image_url,
 		line_items: lineItems,

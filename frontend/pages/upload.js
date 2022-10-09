@@ -33,9 +33,6 @@ export default function Upload() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const username = getCredentials();
-		console.log("USERNAME: ", username);
-
 		const formData = new FormData();
 		formData.append("file", file);
 
