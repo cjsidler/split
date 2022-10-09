@@ -1,80 +1,74 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import axios from "axios";
 
 import Navbar from "../../components/navbar";
 // Loading json to simulate API request
-// import styles from "./addreceipt.module.scss";
-
-// import data from "../data/result.json";
+import styles from "../addreceipt.module.scss";
 
 export default function Login() {
 	const router = useRouter();
 	const { receiptId } = router.query;
 
-	// const renderItems = () => {
-	// 	return data.line_items.map((item) => {
-	// 		return (
-	// 			<div className={styles.item_container}>
-	// 				<p>Price: {item.total}</p>
-	// 				<p>Item: {item.description}</p>
-	// 				<p>Quantity: {item.quantity}</p>
-	// 				<p>Type: {item.type}</p>
-	// 			</div>
-	// 		);
-	// 	});
-	// };
+	const [receipt, setReceipt] = useState({});
 
-	// const saveReceipt = async (e) => {
-	// 	e.preventDefault();
+	const renderItems = () => {
+		return receipt.line_items.map((item) => {
+			return (
+				<div className={styles.item_container}>
+					<p>Price: {item.total}</p>
+					<p>Item: {item.description}</p>
+					<p>Quantity: {item.quantity}</p>
+					<p>Type: {item.type}</p>
+				</div>
+			);
+		});
+	};
 
-	// 	const response = await axios({
-	// 		method: "post",
-	// 		url: "http://localhost:8080/receipts",
-	// 		data: data,
-	// 		headers: {
-	// 			Authorization: `Bearer ${localStorage.getItem("token")}`,
-	// 		},
-	// 	});
+	const getReceipt = async () => {
+		console.log("RECEIPT ID: ", receiptId);
+		const response = await axios({
+			method: "get",
+			url: `http://localhost:8080/receipts/${receiptId}`,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		});
 
-	// 	router.push("/receipts");
-	// };
+		setReceipt(response.data);
+	};
+
+	useEffect(() => {
+		// Only call API if receipId provided
+		if (receiptId) {
+			getReceipt();
+		}
+	}, [receiptId]);
 
 	return (
 		<div className="body">
 			<Navbar />
 			<div className="App">
 				<h1 className="login-title">/receipts/{receiptId}</h1>
-				{/* 
-				<div className={styles.receipt_container}>
-					<div className={styles.vendor_container}>
-						<img src={data.img_thumbnail_url} alt="image" />
-						<p>{data.vendor.name}</p>
-						<p>{data.vendor.phone_number}</p>
-						<p>{data.vendor.web}</p>
-						<p>{data.vendor_type}</p>
+				{receipt.vendor ? (
+					<div className={styles.receipt_container}>
+						<div className={styles.vendor_container}>
+							<img src={receipt.img_thumbnail_url} alt="image" />
+							<p>{receipt.vendor.name}</p>
+							<p>{receipt.vendor.address}</p>
+						</div>
+
+						<p>date: {receipt.date}</p>
+						<p>subtotal: {receipt.subtotal}</p>
+						<p>tax: {receipt.tax}</p>
+						<p>total: {receipt.total}</p>
+
+						<h1>Items</h1>
+
+						{renderItems()}
 					</div>
-
-					<button className="save-receipt-btn" onClick={saveReceipt}>
-						Save Receipt
-					</button>
-
-					<p>Payment: {data.payment_display_name}</p>
-					<p>cashback: {data.cashback}</p>
-					<p>category: {data.category}</p>
-					<p>cashback: {data.cashback}</p>
-					<p>created: {data.created}</p>
-					<p>date: {data.date}</p>
-					<p>invoice_number: {data.invoice_number}</p>
-					<p>phone_number: {data.phone_number}</p>
-					<p>subtotal: {data.subtotal}</p>
-					<p>tax: {data.tax}</p>
-					<p>total: {data.total}</p>
-
-					<h1>Items</h1>
-
-					{renderItems()} */}
-				{/* </div> */}
+				) : null}
 			</div>
 		</div>
 	);

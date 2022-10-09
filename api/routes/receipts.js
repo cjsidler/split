@@ -107,7 +107,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
 });
 
 /*
-    Get a single receipt by id
+    Delete a single receipt by id
 */
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
 	try {
