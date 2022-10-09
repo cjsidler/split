@@ -13,6 +13,7 @@ export default function Login() {
 	const router = useRouter();
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
 
 	const handleChange = (e) => {
 		e.preventDefault();
@@ -34,19 +35,25 @@ export default function Login() {
 			data: credentials,
 		});
 
-		// Raw token
-		const token = response.data.token;
+		console.log("RESPONSE: ", response);
+		if (response.data.message) {
+			setError(response.data.message);
+		} else {
+			// Raw token
+			const token = response.data.token;
 
-		// Decode token
-		const decoded = jwt_decode(token);
+			// Decode token
+			const decoded = jwt_decode(token);
 
-		// Save token contents to local storage for persistence
-		localStorage.setItem("username", decoded.username);
-		localStorage.setItem("email", decoded.email);
-		localStorage.setItem("exp", decoded.exp);
-		localStorage.setItem("iat", decoded.iat);
+			// Save token contents to local storage for persistence
+			localStorage.setItem("token", token);
+			localStorage.setItem("username", decoded.username);
+			localStorage.setItem("email", decoded.email);
+			localStorage.setItem("exp", decoded.exp);
+			localStorage.setItem("iat", decoded.iat);
 
-		router.push("/upload");
+			router.push("/upload");
+		}
 	};
 
 	return (
@@ -58,6 +65,8 @@ export default function Login() {
 					className="login-form"
 					onSubmit={(e) => handleSubmit(e)}
 					autoComplete="new-password">
+					{error ? <div className="login_error_container">{error}</div> : null}
+
 					<input
 						onChange={handleChange}
 						className="login-input"

@@ -23,51 +23,27 @@ app.use(morgan("tiny"));
 // Parse all requests before handlers. Puts data on req.body
 app.use(bodyParser.json());
 
-/*
-  CONSTANTS
-*/
 const PORT = 8080;
 
-app.get("/", (req, res) => {
-    res.json({ message: "This is the root route!" });
-});
 
-/*
-	USERS Middleware
-*/
+// USERS Routes
 app.use("/users", require("./routes/users"));
 
-/*
-    OCR API
-*/
+// RECEIPTS Routes
+app.use("/receipts", require("./routes/receipts"));
 
-// app.post("/upload_files", upload.single("file"), async (req, res) => {
-//     const veryfi_client = new Client(client_id, client_secret, username, api_key);
-//     try {
-//         const response = await veryfi_client.process_document(req.file.path);
-//         console.log(response.data);
-//         res.status(200).send(response.data);
-//     } catch (error) {
-//         console.log(error);
-//         res.json("error calling OCR API");
-//     }
 
-//     // Remove temporary file
-//     fs.unlink(req.file.path, (err) => {
-//         if (err) console.log(err);
-//     });
-// });
-
-app.post("/upload_files", async (req, res) => {
-    res.json(sample_ocr_response);
-});
+//UPLOAD FILES Routes
+app.use("/upload_files", require("./routes/upload_files"));
 
 // Error middleware
 app.use((err, req, res, next) => {
-    console.log(`Unhandled error ${err}. URL = ${req.originalUrl}, method = ${req.method}`);
-    res.status.send(`500 - Server Error`);
+	console.log(
+		`Unhandled error ${err}. URL = ${req.originalUrl}, method = ${req.method}`
+	);
+	res.status.send(`500 - Server Error`);
 });
 
 app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`);
+	console.log(`Example app listening on port ${PORT}`);
 });

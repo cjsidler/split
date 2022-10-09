@@ -54,29 +54,6 @@ export default function Login() {
 
 					<hr />
 
-					<div className="student-container">
-						<img
-							className="profile_img"
-							src="/abby_profile.jpeg"
-							alt="stephen_img"
-						/>
-						<div className="student-about-container">
-							<h3>Abby Thornton</h3>
-							<p>
-								I am currently pursing a bachelors degree from Oregon State
-								University in Computer Science. As an administrative
-								professional, I became enamored with the ways in which we can
-								use technology to build custom solutions. I went from managing
-								basic websites and databases to learning how to design custom
-								reports, write automation and build custom power apps in order
-								to solve unique problems and make work more efficient. This has
-								led me to diving deeper into technology and pursuing a new
-								career in which I can design software that will help others
-								create value through technology.
-							</p>
-						</div>
-					</div>
-
 					<hr />
 
 					<div className="student-container">
