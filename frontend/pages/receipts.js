@@ -22,6 +22,17 @@ export default function Receipts() {
 		setReceipts(response.data);
 	};
 
+	const deleteReceipt = async ({ id }) => {
+		const response = await axios({
+			method: "delete",
+			url: `http://localhost:8080/receipts/${id}`,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		})
+	};
+
+
 	useEffect(() => {
 		getReceipts();
 	}, []);
@@ -31,7 +42,7 @@ export default function Receipts() {
 			<Navbar />
 			<div className="App">
 				<div className={styles.table_container}>
-					<ReceiptTable receipts={receipts} />
+					<ReceiptTable receipts={receipts} deleteReceipt={deleteReceipt}/>
 				</div>
 			</div>
 		</div>
