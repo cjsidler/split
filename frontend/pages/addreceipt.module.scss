@@ -13,11 +13,20 @@
 .receipt_container {
     background-color: rgb(246, 246, 246);
     width: 100%;
-    min-height: 95vh;
+    // min-height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.totals_container {
+    background-color: rgb(246, 246, 246);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 40px;
 }
 
 .item_container {
