@@ -10,7 +10,7 @@ export default function Home() {
 
     useEffect(() => {
         // Check if localStorage has token that hasn't expired yet
-        // const exp = localStorage.getItem("exp");
+        const exp = localStorage.getItem("exp");
         // localStorage.removeItem("myCat");
         // If token is expired, clear out token from localStorage and don't set set isLoggedIn to true
     }, []);
