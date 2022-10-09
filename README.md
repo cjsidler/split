@@ -6,40 +6,41 @@ Split a tab between friends by quickly uploading a photo of a receipt and easily
 
 ### Frontend
 
-- Runs on localhost:3000
+-   Runs on localhost:3000
 
 #### Dependencies
 
-- Next.js
-- axios
-- Sass
-- jwt-decode
+-   Next.js
+-   axios
+-   Sass
+-   jwt-decode
+-   Zustand
 
 #### How to Run
 
-- next-auth requires 16.13.0. I recommend installing different versions of node with nvm.
-- $ npm install
-- $ npm run dev
+-   next-auth requires 16.13.0. I recommend installing different versions of node with nvm.
+-   $ npm install
+-   $ npm run dev
 
 ### Backend
 
-- Runs on localhost:8080
+-   Runs on localhost:8080
 
 #### Dependencies
 
-- morgan
-- body-parser
-- nodemon
-- express
-- cors
-- mongoose
-- dotenv
-- @veryfi/veryfi-sdk
-- multer
-- bcrypt
-- jsonwebtoken
+-   morgan
+-   body-parser
+-   nodemon
+-   express
+-   cors
+-   mongoose
+-   dotenv
+-   @veryfi/veryfi-sdk
+-   multer
+-   bcrypt
+-   jsonwebtoken
 
 #### How to Run
 
-- $npm i -g nodemon
-- $ nodemon
+-   $npm i -g nodemon
+-   $ nodemon

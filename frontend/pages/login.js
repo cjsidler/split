@@ -41,6 +41,7 @@ export default function Login() {
 		const decoded = jwt_decode(token);
 
 		// Save token contents to local storage for persistence
+		localStorage.setItem("token", token);
 		localStorage.setItem("username", decoded.username);
 		localStorage.setItem("email", decoded.email);
 		localStorage.setItem("exp", decoded.exp);
