@@ -15,10 +15,10 @@ function ReceiptTable({ receipts, deleteReceipt }) {
 				<caption className={styles.caption}>Past Receipts</caption>
 				<thead>
 					<tr>
+						<th className={styles.header}></th>
 						<th className={styles.header}>Vendor</th>
 						<th className={styles.header}>Date</th>
 						<th className={styles.header}>Total</th>
-						<th className={styles.header}>Split?</th>
 					</tr>
 				</thead>
 				<tbody>{renderRows()}</tbody>

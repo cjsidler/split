@@ -63,19 +63,27 @@ function ReceiptRow({ receipt, deleteReceipt }) {
 	return (
 		<>
 			<tr className={styles.table_row}>
+				{/* Will need to insert on click handler and pass the data from total*/}
 				<td className={styles.data_row}>
-					<Link href={`http://localhost:3000/receipts/${receipt._id}`}>
+					<button className={styles.split_btn} onClick={openModal}>
+						Split
+					</button>
+				</td>
+
+				<td className={styles.data_row}>
+					<Link
+						className={styles.vendor_link}
+						href={`http://localhost:3000/receipts/${receipt._id}`}>
 						{receipt.vendor.name}
 					</Link>
 				</td>
 				<td className={styles.data_row}>{receipt.date}</td>
-				<td className={styles.data_row}>{receipt.total}</td>
-				{/* Will need to insert on click handler and pass the data from total*/}
+				<td className={styles.data_row}>$ {receipt.total}</td>
 				<td className={styles.data_row}>
-					<button onClick={openModal}>Split</button>
-				</td>
-				<td className={styles.data_row}>
-					<FaTrashAlt onClick={() => deleteReceipt(receipt._id)} />
+					<FaTrashAlt
+						className={styles.delete_icon}
+						onClick={() => deleteReceipt(receipt._id)}
+					/>
 				</td>
 			</tr>
 			<Modal
