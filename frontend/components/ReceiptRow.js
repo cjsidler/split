@@ -31,6 +31,18 @@ function ReceiptRow({ receipt, deleteReceipt }) {
 			bottom: "auto",
 			marginRight: "-50%",
 			transform: "translate(-50%, -50%)",
+			backgroundColor: "rgba(50, 77, 232, 0.5)",
+			color: "black",
+			letterSpacing: "2px",
+			width: "30%",
+			height: "50%",
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center",
+			alignItems: "center",
+			fontFamily: "Roboto",
+			fontSize: "20px",
+			borderRadius: "10px",
 		},
 	};
 
@@ -61,9 +73,9 @@ function ReceiptRow({ receipt, deleteReceipt }) {
 
 	let handleChange = async (e) => {
 		setSplitters(e.value);
-		let newSplit = receipt.total/e.value;
+		let newSplit = receipt.total / e.value;
 		setSplitPrice(newSplit.toFixed(2));
-	}
+	};
 
 	return (
 		<>
