@@ -2,10 +2,10 @@ import React from "react";
 import ReceiptRow from "./ReceiptRow";
 import styles from "../pages/receipts.module.scss";
 
-function ReceiptTable({ receipts }) {
+function ReceiptTable({ receipts, deleteReceipt }) {
 	const renderRows = () => {
 		return receipts.map((r) => {
-			return <ReceiptRow receipt={r} />;
+			return <ReceiptRow receipt={r} deleteReceipt={deleteReceipt} />;
 		});
 	};
 

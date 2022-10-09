@@ -9,7 +9,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import "react-dropdown/style.css";
 import styles from "../pages/receipts.module.scss";
 
-function ReceiptRow({ receipt }) {
+function ReceiptRow({ receipt, deleteReceipt }) {
 	const [modalIsOpen, setIsOpen] = React.useState(false);
 	const [splitters, setSplitters] = React.useState(1);
 
@@ -20,16 +20,6 @@ function ReceiptRow({ receipt }) {
 	function closeModal() {
 		setIsOpen(false);
 	}
-
-	const deleteReceipt = async (id) => {
-		const response = await axios({
-			method: "delete",
-			url: `http://localhost:8080/receipts/${id}`,
-			headers: {
-				Authorization: `Bearer ${localStorage.getItem("token")}`,
-			},
-		});
-	};
 
 	const customStyles = {
 		content: {
