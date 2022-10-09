@@ -12,17 +12,17 @@ export default function Home() {
 
     useEffect(() => {
         // Check if localStorage has token that hasn't expired yet
+        const token = localStorage.getItem("token");
         const exp = localStorage.getItem("exp");
         const currentDateTime = Math.floor(Date.now() / 1000);
 
-        if (exp && currentDateTime < exp) {
+        if (token && exp && currentDateTime < exp) {
+            // If token exists and is not expired, set global logged-in state to true
             setIsLoggedIn(true);
-        } else if (exp && currentDateTime >= exp) {
+        } else if (!token || !exp || currentDateTime >= exp) {
+            // If no token, no exp, or token expired, clear localStorage
             localStorage.clear();
         }
-
-        // localStorage.removeItem("myCat");
-        // If token is expired, clear out token from localStorage and don't set set isLoggedIn to true
     }, []);
 
     return (
