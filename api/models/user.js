@@ -1,46 +1,46 @@
 const mongoose = require("mongoose");
-const receiptSchema = require("./receipt");
+const { receiptSchema } = require("./receipt.js");
 require("dotenv").config();
 
 mongoose.connect(process.env.DB_URI, {
-    useNewUrlParser: true,
+	useNewUrlParser: true,
 });
 
 const db = mongoose.connection;
 
 db.once("open", () => {
-    console.log("Successfully connected to MongoDB using Mongoose!");
+	console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
 // Define Schema
 const userSchema = mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    email: { type: String, required: false, unique: true },
-    receipts: [receiptSchema],
+	username: { type: String, required: true, unique: true },
+	password: { type: String, required: true },
+	email: { type: String, required: false, unique: true },
+	receipts: [receiptSchema], // This line kills server
 });
 
 const User = mongoose.model("User", userSchema);
 
 const createUser = async (username, password, email) => {
-    const user = new User({
-        username: username,
-        password: password,
-        email: email,
-    });
-    return user.save();
+	const user = new User({
+		username: username,
+		password: password,
+		email: email,
+	});
+	return user.save();
 };
 
 const findUsers = async () => {
-    const query = User.find();
-    const result = await query.exec();
-    return result;
+	const query = User.find();
+	const result = await query.exec();
+	return result;
 };
 
 const findUser = async (username) => {
-    const query = User.findOne({ username: username });
-    const result = await query.exec();
-    return result;
+	const query = User.findOne({ username: username });
+	const result = await query.exec();
+	return result;
 };
 
 // const updateUser = async (filter, newData) => {
@@ -57,10 +57,10 @@ const findUser = async (username) => {
 // };
 
 module.exports = {
-    User,
-    createUser,
-    findUsers,
-    findUser,
-    // deleteUser,
-    // updateUser,
+	User,
+	createUser,
+	findUsers,
+	findUser,
+	// deleteUser,
+	// updateUser,
 };

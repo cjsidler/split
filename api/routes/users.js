@@ -8,6 +8,7 @@ const { User, createUser, findUsers, findUser } = require("../models/user.js");
 const SALT_ROUNDS = 10;
 require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
+
 /*
     Get list of all Users
 */

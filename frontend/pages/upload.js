@@ -30,7 +30,7 @@ export default function Upload() {
 			.then((data) => console.log(data))
 			.catch((err) => ("Error occured", err));
 
-		router.push("/receipts");
+		router.push("/addreceipt");
 	};
 
 	return (
