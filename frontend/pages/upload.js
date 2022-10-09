@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import FormData from "form-data";
 
+import axios from "axios";
+
 import Navbar from "../components/navbar";
 import styles from "./upload.module.scss";
 
@@ -17,18 +19,37 @@ export default function Upload() {
 		setFileChosen(true);
 	};
 
-	const handleSubmit = (e) => {
+	/*
+		Check credentials
+	*/
+	const getCredentials = () => {
+		return localStorage.getItem("username");
+	};
+
+	// useEffect(() => {
+
+	// }, []);
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const username = getCredentials();
+		console.log("USERNAME: ", username);
 
 		const formData = new FormData();
 		formData.append("file", file);
-		fetch("http://localhost:8080/upload_files", {
-			method: "POST",
-			body: formData,
-		})
-			.then((res) => res.json())
-			.then((data) => console.log(data))
-			.catch((err) => ("Error occured", err));
+
+		const response = await axios({
+			method: "post",
+			url: "http://localhost:8080/upload_files",
+			data: formData,
+			headers: {
+				"Content-Type": "multipart/form-data",
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		});
+
+		console.log(response);
 
 		router.push("/addreceipt");
 	};
