@@ -28,27 +28,38 @@ const receiptSchema = new mongoose.Schema({
 });
 
 const Receipt = mongoose.model("Receipt", receiptSchema);
+const LineItem = mongoose.model("LineItem", lineItemSchema);
+const Vendor = mongoose.model("Vendor", vendorSchema);
 
-const createReceipt = async (
-	date,
-	image_url,
-	line_items,
-	tax,
-	subtotal,
-	tip,
-	total,
-	vendor
-) => {
+const createReceipt = async (data) => {
+	const vendor = new Vendor({
+		name: data.vendor.name,
+		phoneNumber: data.vendor.phoneNumber,
+		address: data.vendor.address,
+	});
+
+	// Create array of line items
+	const lineItems = data.line_items.map((item) => {
+		const line_item = new LineItem({
+			description: item.description,
+			quantity: item.quantity,
+			total: item.total,
+		});
+
+		return line_item;
+	});
+
 	const receipt = new Receipt({
-		date: date,
-		image_url: image_url,
-		line_items: line_items,
-		tax: tax,
-		subtotal: subtotal,
-		tip: tip,
-		total: total,
+		date: data.date,
+		image_url: data.image_url,
+		line_items: lineItems,
+		tax: data.tax,
+		subtotal: data.subtotal,
+		tip: data.tip,
+		total: data.total,
 		vendor: vendor,
 	});
+
 	return receipt.save();
 };
 
