@@ -81,6 +81,14 @@ const findReceipt = async (id) => {
 	return result;
 };
 
+/*
+	Delete a receipt by /:id
+*/
+const deleteReceipt = async (_id) => {
+	const result = await Receipt.deleteOne({ _id });
+	return result.deletedCount;
+};
+
 // const updateUser = async (filter, newData) => {
 // 	const result = await User.findOneAndUpdate(filter, newData, {
 // 		new: true,
@@ -89,17 +97,12 @@ const findReceipt = async (id) => {
 // 	return result;
 // };
 
-// const deleteUser = async (_id) => {
-// 	const result = await User.deleteOne({ _id });
-// 	return result.deletedCount;
-// };
-
 module.exports = {
 	receiptSchema,
 	Receipt,
 	createReceipt,
 	findReceipts,
 	findReceipt,
-	// deleteReceipt,
+	deleteReceipt,
 	// updateReceipt,
 };
