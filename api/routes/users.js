@@ -1,18 +1,15 @@
 const bcrypt = require("bcrypt");
-const express = require("express");
 const router = require("express").Router();
 var jwt = require("jsonwebtoken");
 
-const { User, createUser, findUsers, findUser } = require("../models/user.js");
+const { createUser, findUsers, findUser } = require("../models/user.js");
 
-const SALT_ROUNDS = 10;
 require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // ------------------------ EXPRESS MIDDLEWARE --------------------------
-/*
-	- Check if user's token is valid before ALL requests
-*/
+
+//Check if user's token is valid before ALL requests
 const isLoggedIn = async (req, res, next) => {
 	try {
 		// Remove 'Bearer' from token
@@ -32,9 +29,8 @@ const isLoggedIn = async (req, res, next) => {
 	}
 };
 
-/*
-    Get list of all Users
-*/
+
+// Get route - list of all Users
 router.get("/", isLoggedIn, async (req, res, next) => {
 	// Get list of all users
 	try {
@@ -45,9 +41,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 	}
 });
 
-/*
-    Signup Route
-*/
+// Post route - to save new user signup to the database
 router.post("/signup", async (req, res, next) => {
 	// Save user to db
 	try {
@@ -82,9 +76,8 @@ router.post("/signup", async (req, res, next) => {
 	// res.json({ message: "Youve hit the login route" });
 });
 
-/*
-    Login Route
-*/
+
+// Post route - to login the user and check if they are valid
 router.post("/login", async (req, res, next) => {
 	// Save user to db
 	try {
