@@ -1,20 +1,27 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
+import useStore from "../store/store";
 import axios from "axios";
 
 import Navbar from "../components/navbar";
 import ReceiptTable from "../components/ReceiptTable";
-
+import Unauthorized from "../components/Unauthorized";
 import styles from "./receipts.module.scss";
 
 export default function Receipts() {
 	const router = useRouter();
+	const isLoggedIn = useStore((state) => state.isLoggedIn);
 
 	const [receipts, setReceipts] = useState([]);
 	const [error, setError] = useState("");
 
 	const [username, setUsername] = useState("");
+
+	const getCredentials = () => {
+		const user = localStorage.getItem("username");
+		setUsername(user);
+	};
 
 	const getReceipts = async () => {
 		const response = await axios({
@@ -24,8 +31,6 @@ export default function Receipts() {
 				Authorization: `Bearer ${localStorage.getItem("token")}`,
 			},
 		});
-
-		console.log(response);
 
 		// Error
 		if (response.message) {
@@ -53,26 +58,21 @@ export default function Receipts() {
 	};
 
 	useEffect(() => {
-		if (!username) {
-			router.push("/login");
-		}
-	}, [username]);
+		getCredentials();
 
-	useEffect(() => {
-		// only call api if loggedIn
 		if (username) {
 			getReceipts();
 		}
-	}, []);
-
-	console.log(error);
+	}, [username]);
 
 	return (
 		<div className="body">
 			<Navbar />
 			<div className="App">
-				{error ? (
-					<div>{error}</div>
+				{error || !username ? (
+					<div className={styles.error_container}>
+						<Unauthorized />
+					</div>
 				) : (
 					<div className={styles.table_container}>
 						<ReceiptTable receipts={receipts} deleteReceipt={deleteReceipt} />
