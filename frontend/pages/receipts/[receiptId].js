@@ -50,7 +50,6 @@ export default function Login() {
 		<div className="body">
 			<Navbar />
 			<div className="App">
-				<h1 className="login-title">/receipts/{receiptId}</h1>
 				{receipt.vendor ? (
 					<div className={styles.receipt_container}>
 						<div className={styles.vendor_container}>
