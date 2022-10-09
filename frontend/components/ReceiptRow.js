@@ -12,6 +12,7 @@ import styles from "../pages/receipts.module.scss";
 function ReceiptRow({ receipt, deleteReceipt }) {
 	const [modalIsOpen, setIsOpen] = React.useState(false);
 	const [splitters, setSplitters] = React.useState(1);
+	const [splitPrice, setSplitPrice] = React.useState(receipt.total);
 
 	function openModal() {
 		setIsOpen(true);
@@ -22,6 +23,7 @@ function ReceiptRow({ receipt, deleteReceipt }) {
 	}
 
 	const customStyles = {
+		height: "50%",
 		content: {
 			top: "50%",
 			left: "50%",
@@ -57,8 +59,11 @@ function ReceiptRow({ receipt, deleteReceipt }) {
 
 	const defaultOption = options[0];
 
-	// let totalPrice;
-	// let splitPrice = totalPrice/splitters;
+	let handleChange = async (e) => {
+		setSplitters(e.value);
+		let newSplit = receipt.total/e.value;
+		setSplitPrice(newSplit.toFixed(2));
+	}
 
 	return (
 		<>
@@ -95,11 +100,11 @@ function ReceiptRow({ receipt, deleteReceipt }) {
 				The split between{" "}
 				<Dropdown
 					options={options}
-					onChange={(e) => setSplitters(e.value)}
+					onChange={handleChange}
 					value={options[splitters - 1]}
 					placeholder="Select an option"
 				/>
-				is ....
+				is ${splitPrice} per person!
 			</Modal>
 		</>
 	);
