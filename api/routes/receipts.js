@@ -113,7 +113,7 @@ router.delete("/:id", isLoggedIn, async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const receipt = await deleteReceipt(id);
-		res.status(200).send(receipt);
+		res.json({ message: "Receipt successfully deleted" });
 	} catch (err) {
 		res.status(500).send(err);
 	}
