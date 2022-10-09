@@ -10,7 +10,7 @@ export default function Receipts() {
 			<Navbar />
 			<div className="App">
 				<div className={styles.table_container}>
-					<ReceiptTable className={styles.table_parent}/>
+					<ReceiptTable />
 				</div>
 
 			</div>
