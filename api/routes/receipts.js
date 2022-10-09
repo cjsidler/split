@@ -28,6 +28,19 @@ router.get("/", async (req, res, next) => {
 });
 
 /*
+    Get a single receipt by id
+*/
+router.get("/:id", async (req, res, next) => {
+	try {
+		const { id } = req.params
+		const receipt = await findReceipt(id);
+		res.status(200).send(receipt);
+	} catch (err) {
+		res.status(500).send(err);
+	}
+});
+
+/*
     Save a receipt to db
 */
 router.post("/", async (req, res, next) => {
