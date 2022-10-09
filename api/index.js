@@ -29,17 +29,25 @@ app.use(bodyParser.json());
 const PORT = 8080;
 
 app.get("/", (req, res) => {
-    res.json({ message: "This is the root route!" });
+	res.json({ message: "This is the root route!" });
 });
 
 /*
-	USERS Middleware
+	USERS Routes
 */
 app.use("/users", require("./routes/users"));
 
 /*
+	receipts Routes
+*/
+app.use("/receipts", require("./routes/receipts"));
+
+/*
     OCR API
 */
+// ====================================================================================================
+// ==================== We should move this to its own route so index.js is not cluttered =============
+// ====================================================================================================
 
 // app.post("/upload_files", upload.single("file"), async (req, res) => {
 //     const veryfi_client = new Client(client_id, client_secret, username, api_key);
@@ -59,15 +67,17 @@ app.use("/users", require("./routes/users"));
 // });
 
 app.post("/upload_files", async (req, res) => {
-    res.json(sample_ocr_response);
+	res.json(sample_ocr_response);
 });
 
 // Error middleware
 app.use((err, req, res, next) => {
-    console.log(`Unhandled error ${err}. URL = ${req.originalUrl}, method = ${req.method}`);
-    res.status.send(`500 - Server Error`);
+	console.log(
+		`Unhandled error ${err}. URL = ${req.originalUrl}, method = ${req.method}`
+	);
+	res.status.send(`500 - Server Error`);
 });
 
 app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`);
+	console.log(`Example app listening on port ${PORT}`);
 });

@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
 	username: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
 	email: { type: String, required: false, unique: true },
-	receipts: [receiptSchema], // This line kills server
+	receipts: [receiptSchema],
 });
 
 const User = mongoose.model("User", userSchema);

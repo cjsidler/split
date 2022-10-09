@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = require("express").Router();
 var jwt = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
 
 const {
 	Receipt,
@@ -25,41 +27,34 @@ router.get("/", async (req, res, next) => {
 	}
 });
 
-// /*
-//     Signup Route
-// */
-// router.post("/", async (req, res, next) => {
-// 	// Save user to db
-// 	try {
-// 		const { username, password, email } = req.body;
+/*
+    Save a receipt to db
+*/
+router.post("/", async (req, res, next) => {
+	try {
+		// Pull off token from request header to get  user
+		// Check that token is valid w/ isLoggedIn middleware
+		// Get json back from veryfi api - use result.json as dummy data
 
-// 		let newUser;
+		const filePath = path.join(__dirname, "../uploads") + "/result.json";
+		console.log(filePath);
 
-// 		if (username && password) {
-// 			// Need to hash pw here & issue JWT back to client
+		// Open & Read json file that we saved from veryfi api response
+		fs.readFile(filePath, async (err, data) => {
+			if (err) throw err;
+			// Convert data to JSON
+			let jsonData = JSON.parse(data);
 
-// 			const hashedPw = await bcrypt.hash(password, 10);
+			// Save receipt data to db
+			const newReceipt = await createReceipt(jsonData);
 
-// 			newUser = await createUser(username, hashedPw, email);
-// 			// Create token & include username
-// 			const token = jwt.sign(
-// 				{
-// 					username: username,
-// 					email: email,
-// 				},
-// 				JWT_SECRET,
-// 				{ expiresIn: 60 * 60 }
-// 			);
+			console.log(newReceipt);
 
-// 			res.json({ token });
-// 		} else {
-// 			res.status(400).send({ error: "All fields are required" });
-// 		}
-// 	} catch (err) {
-// 		res.status(500).send(err);
-// 	}
-
-// 	// res.json({ message: "Youve hit the login route" });
-// });
+			res.json({ data: jsonData });
+		});
+	} catch (err) {
+		res.status(500).send(err);
+	}
+});
 
 module.exports = router;
