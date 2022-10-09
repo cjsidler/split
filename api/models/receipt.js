@@ -30,6 +30,7 @@ const Receipt = mongoose.model("Receipt", receiptSchema);
 const LineItem = mongoose.model("LineItem", lineItemSchema);
 const Vendor = mongoose.model("Vendor", vendorSchema);
 
+// Create receipt mongodb function
 const createReceipt = async (data, userId) => {
 	const vendor = new Vendor({
 		name: data.vendor.name,
@@ -63,39 +64,25 @@ const createReceipt = async (data, userId) => {
 	return receipt.save();
 };
 
-/*
-    Get all receipts
-*/
+// Get all receipts mongodb function
 const findReceipts = async () => {
 	const query = Receipt.find();
 	const result = await query.exec();
 	return result;
 };
 
-/*
-    Get a receipt by /:id
-*/
+// Get a receipt by a specific id mongodb function
 const findReceipt = async (id) => {
 	const query = Receipt.findOne({ _id: id });
 	const result = await query.exec();
 	return result;
 };
 
-/*
-	Delete a receipt by /:id
-*/
+// Delete a receipt by a specific id mongodb function
 const deleteReceipt = async (_id) => {
 	const result = await Receipt.deleteOne({ _id });
 	return result.deletedCount;
 };
-
-// const updateUser = async (filter, newData) => {
-// 	const result = await User.findOneAndUpdate(filter, newData, {
-// 		new: true,
-// 		useFindAndModify: false,
-// 	});
-// 	return result;
-// };
 
 module.exports = {
 	receiptSchema,
@@ -104,5 +91,4 @@ module.exports = {
 	findReceipts,
 	findReceipt,
 	deleteReceipt,
-	// updateReceipt,
 };
