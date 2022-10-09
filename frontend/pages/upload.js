@@ -4,6 +4,7 @@ import Head from "next/head";
 import FormData from "form-data";
 
 import axios from "axios";
+import { BsCloudUpload } from "react-icons/bs";
 
 import Navbar from "../components/navbar";
 import styles from "./upload.module.scss";
@@ -53,11 +54,6 @@ export default function Upload() {
 
 	return (
 		<div className="container">
-			<Head>
-				<title>Create Next App</title>
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
 			<div className="body">
 				<Navbar />
 				<div className={styles.upload_screen_container}>
@@ -82,6 +78,10 @@ export default function Upload() {
 									className={styles.pick_file_btn}
 									type="file"
 									onChange={handleChange}
+								/>
+								<BsCloudUpload
+									// style={{ size: "40px" }}
+									className={styles.upload_icon}
 								/>
 								Choose a Receipt
 							</label>
