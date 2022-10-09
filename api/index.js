@@ -25,19 +25,15 @@ app.use(bodyParser.json());
 
 const PORT = 8080;
 
-/*
-	USERS Routes
-*/
+
+// USERS Routes
 app.use("/users", require("./routes/users"));
 
-/*
-	RECEIPTS Routes
-*/
+// RECEIPTS Routes
 app.use("/receipts", require("./routes/receipts"));
 
-/*
-	UPLOAD FILES Routes
-*/
+
+//UPLOAD FILES Routes
 app.use("/upload_files", require("./routes/upload_files"));
 
 // Error middleware
