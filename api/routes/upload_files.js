@@ -1,15 +1,13 @@
-const express = require("express");
 const router = require("express").Router();
 
-const { User, createUser, findUsers, findUser } = require("../models/user.js");
+const { findUser } = require("../models/user.js");
 
 require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // ------------------------ EXPRESS MIDDLEWARE --------------------------
-/*
-	- Check if user's token is valid before ALL requests
-*/
+
+//Check if user's token is valid before ALL requests
 const isLoggedIn = async (req, res, next) => {
 	try {
 		// Remove 'Bearer' from token
@@ -29,12 +27,8 @@ const isLoggedIn = async (req, res, next) => {
 	}
 };
 
-/*
-    OCR API
-*/
-// ====================================================================================================
-// ==================== We should move this to its own route so index.js is not cluttered =============
-// ====================================================================================================
+// OCR API
+// Commented code below is to save unnecessary requests to the API as we are limited to 50 requests total
 
 // router.post("/", isLoggedIn, upload.single("file"), async (req, res) => {
 //     const veryfi_client = new Client(client_id, client_secret, username, api_key);

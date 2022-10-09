@@ -1,15 +1,12 @@
-const bcrypt = require("bcrypt");
-const express = require("express");
 const router = require("express").Router();
 var jwt = require("jsonwebtoken");
 const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
-const { User, createUser, findUsers, findUser } = require("../models/user.js");
+const { findUser } = require("../models/user.js");
 
 const {
-	Receipt,
 	createReceipt,
 	findReceipts,
 	findReceipt,
@@ -19,9 +16,8 @@ const {
 require("dotenv").config();
 
 // ------------------------ EXPRESS MIDDLEWARE --------------------------
-/*
-	- Check if user's token is valid before ALL requests
-*/
+
+// Check if user's token is valid before ALL requests
 const isLoggedIn = async (req, res, next) => {
 	try {
 		// Remove 'Bearer' from token
@@ -41,9 +37,8 @@ const isLoggedIn = async (req, res, next) => {
 	}
 };
 
-/*
-    Get list of all Receipts
-*/
+
+// Get route - list of all Receipts
 router.get("/", isLoggedIn, async (req, res, next) => {
 	// Get list of all users
 	try {
@@ -54,9 +49,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 	}
 });
 
-/*
-    Get a single receipt by id
-*/
+// Get route - gets a receipt by a unique id 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
 	try {
 		const { id } = req.params;
@@ -67,9 +60,7 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
 	}
 });
 
-/*
-    Save a receipt to db
-*/
+// Post route - saves a receipt to the database
 router.post("/", isLoggedIn, async (req, res, next) => {
 	try {
 		// Pull off token from request header to get  user
@@ -106,9 +97,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
 	}
 });
 
-/*
-    Delete a single receipt by id
-*/
+// Delete route - deletes a receipt from the database by a unique id
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
 	try {
 		const { id } = req.params;
