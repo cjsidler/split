@@ -9,6 +9,9 @@ const useStore = create((set) => ({
 
     userEmail: "",
     setUserEmail: (email) => set((state) => ({ userEmail: email })),
+
+    receiptData: null,
+    setReceiptData: (newReceipt) => set((state) => ({ receiptData: newReceipt })),
 }));
 
 export default useStore;
