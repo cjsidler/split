@@ -1,3 +1,10 @@
+const multer = require("multer");
+const upload = multer({ dest: "uploads" });
+const fs = require("fs");
+const Client = require("@veryfi/veryfi-sdk");
+const sample_ocr_response = require("../uploads/result.json");
+var jwt = require("jsonwebtoken");
+
 const router = require("express").Router();
 
 const { findUser } = require("../models/user.js");
@@ -15,6 +22,8 @@ const isLoggedIn = async (req, res, next) => {
 
 		// Verify that token is valid
 		const token = jwt.verify(authHeaderValue, JWT_SECRET);
+
+		console.log(token);
 		// Decode token & grab username
 		const username = jwt.decode(authHeaderValue).username;
 		// Check that user is a valid row in db
@@ -31,20 +40,20 @@ const isLoggedIn = async (req, res, next) => {
 // Commented code below is to save unnecessary requests to the API as we are limited to 50 requests total
 
 // router.post("/", isLoggedIn, upload.single("file"), async (req, res) => {
-//     const veryfi_client = new Client(client_id, client_secret, username, api_key);
-//     try {
-//         const response = await veryfi_client.process_document(req.file.path);
-//         console.log(response.data);
-//         res.status(200).send(response.data);
-//     } catch (error) {
-//         console.log(error);
-//         res.json("error calling OCR API");
-//     }
+// 	const veryfi_client = new Client(client_id, client_secret, username, api_key);
+// 	try {
+// 		const response = await veryfi_client.process_document(req.file.path);
+// 		console.log(response.data);
+// 		res.status(200).send(response.data);
+// 	} catch (error) {
+// 		console.log(error);
+// 		res.json("error calling OCR API");
+// 	}
 
-//     // Remove temporary file
-//     fs.unlink(req.file.path, (err) => {
-//         if (err) console.log(err);
-//     });
+// 	// Remove temporary file
+// 	fs.unlink(req.file.path, (err) => {
+// 		if (err) console.log(err);
+// 	});
 // });
 
 router.post("/", isLoggedIn, async (req, res) => {
