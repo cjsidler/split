@@ -2,14 +2,15 @@ import { useRouter } from "next/router";
 
 import axios from "axios";
 
-import Navbar from "../components/navbar";
+import Navbar from "../../components/navbar";
 // Loading json to simulate API request
 // import styles from "./addreceipt.module.scss";
 
 // import data from "../data/result.json";
 
 export default function Login() {
-	// const router = useRouter();
+	const router = useRouter();
+	const { userId } = router.query;
 
 	// const renderItems = () => {
 	// 	return data.line_items.map((item) => {
@@ -43,7 +44,7 @@ export default function Login() {
 		<div className="body">
 			<Navbar />
 			<div className="App">
-				<h1 className="login-title">/receipt/:id</h1>
+				<h1 className="login-title">/receipt/{userId}</h1>
 				{/* 
 				<div className={styles.receipt_container}>
 					<div className={styles.vendor_container}>
