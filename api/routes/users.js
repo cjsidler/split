@@ -9,10 +9,33 @@ const SALT_ROUNDS = 10;
 require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
+// ------------------------ EXPRESS MIDDLEWARE --------------------------
+/*
+	- Check if user's token is valid before ALL requests
+*/
+const isLoggedIn = async (req, res, next) => {
+	try {
+		// Remove 'Bearer' from token
+		const authHeaderValue = req.headers.authorization.slice(7);
+
+		// Verify that token is valid
+		const token = jwt.verify(authHeaderValue, JWT_SECRET);
+		// Decode token & grab username
+		const username = jwt.decode(authHeaderValue).username;
+		// Check that user is a valid row in db
+		const foundUser = await findUser(username);
+
+		return next();
+	} catch (e) {
+		// Invalid token
+		return res.status(401).json({ message: "Unauthorized" });
+	}
+};
+
 /*
     Get list of all Users
 */
-router.get("/", async (req, res, next) => {
+router.get("/", isLoggedIn, async (req, res, next) => {
 	// Get list of all users
 	try {
 		const users = await findUsers();

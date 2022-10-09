@@ -17,10 +17,33 @@ const {
 
 require("dotenv").config();
 
+// ------------------------ EXPRESS MIDDLEWARE --------------------------
+/*
+	- Check if user's token is valid before ALL requests
+*/
+const isLoggedIn = async (req, res, next) => {
+	try {
+		// Remove 'Bearer' from token
+		const authHeaderValue = req.headers.authorization.slice(7);
+
+		// Verify that token is valid
+		const token = jwt.verify(authHeaderValue, JWT_SECRET);
+		// Decode token & grab username
+		const username = jwt.decode(authHeaderValue).username;
+		// Check that user is a valid row in db
+		const foundUser = await findUser(username);
+
+		return next();
+	} catch (e) {
+		// Invalid token
+		return res.status(401).json({ message: "Unauthorized" });
+	}
+};
+
 /*
     Get list of all Receipts
 */
-router.get("/", async (req, res, next) => {
+router.get("/", isLoggedIn, async (req, res, next) => {
 	// Get list of all users
 	try {
 		const receipts = await findReceipts();
@@ -33,7 +56,7 @@ router.get("/", async (req, res, next) => {
 /*
     Get a single receipt by id
 */
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", isLoggedIn, async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const receipt = await findReceipt(id);
@@ -46,7 +69,7 @@ router.get("/:id", async (req, res, next) => {
 /*
     Save a receipt to db
 */
-router.post("/", async (req, res, next) => {
+router.post("/", isLoggedIn, async (req, res, next) => {
 	try {
 		// Pull off token from request header to get  user
 		// Check that token is valid w/ isLoggedIn middleware
