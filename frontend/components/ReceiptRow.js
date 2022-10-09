@@ -78,7 +78,7 @@ function ReceiptRow({ items }) {
                 The split between{" "}
                 <Dropdown
                     options={options}
-                    onChange={(e) => setSplitters(e.target.value)}
+                    onChange={(e) => setSplitters(e.value)}
                     value={defaultOption}
                     placeholder="Select an option"
                 />{" "}
