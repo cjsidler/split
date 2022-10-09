@@ -10,7 +10,7 @@ const receiptSchema = new mongoose.Schema({
     subtotal: { type: Number },
     tip: { type: Number },
     total: { type: Number },
-    vendor: [vendorSchema],
+    vendor: vendorSchema,
 });
 
 module.exports = receiptSchema;
