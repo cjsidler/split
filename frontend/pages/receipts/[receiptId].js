@@ -10,7 +10,7 @@ import Navbar from "../../components/navbar";
 
 export default function Login() {
 	const router = useRouter();
-	const { userId } = router.query;
+	const { receiptId } = router.query;
 
 	// const renderItems = () => {
 	// 	return data.line_items.map((item) => {
@@ -44,7 +44,7 @@ export default function Login() {
 		<div className="body">
 			<Navbar />
 			<div className="App">
-				<h1 className="login-title">/receipt/{userId}</h1>
+				<h1 className="login-title">/receipts/{receiptId}</h1>
 				{/* 
 				<div className={styles.receipt_container}>
 					<div className={styles.vendor_container}>
