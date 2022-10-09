@@ -1,11 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const multer = require("multer");
-const upload = multer({ dest: "uploads" });
-const fs = require("fs");
-const Client = require("@veryfi/veryfi-sdk");
-const sample_ocr_response = require("./uploads/result.json");
+
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
@@ -25,13 +21,11 @@ app.use(bodyParser.json());
 
 const PORT = 8080;
 
-
 // USERS Routes
 app.use("/users", require("./routes/users"));
 
 // RECEIPTS Routes
 app.use("/receipts", require("./routes/receipts"));
-
 
 //UPLOAD FILES Routes
 app.use("/upload_files", require("./routes/upload_files"));
