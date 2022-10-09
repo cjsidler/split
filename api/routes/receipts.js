@@ -13,6 +13,7 @@ const {
 	createReceipt,
 	findReceipts,
 	findReceipt,
+	deleteReceipt,
 } = require("../models/receipt.js");
 
 require("dotenv").config();
@@ -100,6 +101,19 @@ router.post("/", isLoggedIn, async (req, res, next) => {
 
 			res.json({ data: jsonData });
 		});
+	} catch (err) {
+		res.status(500).send(err);
+	}
+});
+
+/*
+    Get a single receipt by id
+*/
+router.delete("/:id", isLoggedIn, async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const receipt = await deleteReceipt(id);
+		res.status(200).send(receipt);
 	} catch (err) {
 		res.status(500).send(err);
 	}
