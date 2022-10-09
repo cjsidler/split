@@ -6,8 +6,6 @@ import data from "../data/result.json";
 import styles from "./addreceipt.module.scss";
 
 export default function Login() {
-	console.log(data);
-
 	const renderItems = () => {
 		return data.line_items.map((item) => {
 			return (
