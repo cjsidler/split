@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
+import axios from "axios";
 
 import Modal from "react-modal";
 import Dropdown from "react-dropdown";
+import { FaTrashAlt } from "react-icons/fa"
 
 import "react-dropdown/style.css";
 import styles from "../pages/receipts.module.scss";
@@ -18,6 +20,16 @@ function ReceiptRow({ receipt }) {
 	function closeModal() {
 		setIsOpen(false);
 	}
+
+	const deleteReceipt = async ({ id }) => {
+		const response = await axios({
+			method: "delete",
+			url: `http://localhost:8080/receipts/${id}`,
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		})
+	};
 
 	const customStyles = {
 		content: {
@@ -72,7 +84,9 @@ function ReceiptRow({ receipt }) {
 				<td className={styles.data_row}>
 					<button onClick={openModal}>Split</button>
 				</td>
-				<td className={styles.data_row}>DELETE</td>
+				<td className={styles.data_row}>
+					<FaTrashAlt onClick={() => deleteReceipt(receipt._id)}/>
+				</td>
 			</tr>
 			<Modal
 				style={customStyles}
