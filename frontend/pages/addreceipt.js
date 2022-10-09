@@ -8,7 +8,7 @@ import styles from "./addreceipt.module.scss";
 
 import data from "../data/result.json";
 
-export default function Login() {
+export default function AddReceipt() {
     const isLoggedIn = useStore((state) => state.isLoggedIn);
     const router = useRouter();
 
@@ -16,10 +16,9 @@ export default function Login() {
         return data.line_items.map((item) => {
             return (
                 <div className={styles.item_container}>
-                    <p>Price: {item.total}</p>
-                    <p>Item: {item.description}</p>
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Type: {item.type}</p>
+                    <p style={{ flexBasis: "50%" }}>Item: {item.description}</p>
+                    <p style={{ flexBasis: "15%" }}>Quantity: {item.quantity}</p>
+                    <p style={{ flexBasis: "15%" }}>Price: {item.total}</p>
                 </div>
             );
         });
@@ -80,7 +79,7 @@ export default function Login() {
 
                     <div className={styles.receipt_container}>
                         <div className={styles.vendor_container}>
-                            <img src={data.img_thumbnail_url} alt="image" />
+                            <img src={data.img_url} alt="image" />
                             <p>{data.vendor.name}</p>
                             <p>{data.vendor.address}</p>
                         </div>
@@ -91,8 +90,18 @@ export default function Login() {
                         <p>total: {data.total}</p>
 
                         <h1>Items</h1>
-
                         {renderItems()}
+
+                        <div className={styles.totals_container}>
+                            <p>Tax: {data.tax}</p>
+                            <p>Subtotal: {data.subtotal}</p>
+                            <p>Tip: {data.tip}</p>
+                            <p>Total: {data.total}</p>
+                        </div>
+
+                        <button className="save-receipt-btn" onClick={saveReceipt}>
+                            Save Receipt
+                        </button>
                     </div>
                 </div>
                 // </div>
